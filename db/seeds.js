@@ -42,7 +42,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           year: 1995,
           image: 'https://leehamnews.com/wp-content/uploads/2019/09/E195-E2_AZUL-960x640.jpg',
           description: 'The A319 is a simple shrink of the baseline A320. Like its main competitor, the 737-700, it is used by a wide range of operators. The increased MTOW options combined with up to two additional fuel tanks give the A319 a relatively long range by single aisle standards. Since 2013 “Sharklets” have been available for the A319s resulting in 4.0% fuel burn improvement and 500kg more payload. In late October 2013, Airbus launched a Sharklet retrofit programme – replacing the original wingtip fences for in-service A320 Family aircraft (MSN 1200 and above).',
-          user: createdUsers[0]
+          user: createdUsers[1]
         }, {
           type: 'A320-200',
           manufacturer: 'Airbus',
@@ -60,7 +60,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           year: 2017,
           image: 'https://www.airway1.com/wp-content/uploads/2018/11/A330-800-MSN1888-first-flight-960x640.jpg',
           description: 'After months of speculation, Airbus launched the A330NEO (new engine option) at the Farnborough Air show in July 2014. In fact this concept is strikingly similar to the first design of the Airbus A350 launched in 2004. This first A350 design was based on an A330 fuselage with new aerodynamics and engines. However this design was rejected by many customers and Airbus went back to the drawing board to design a complete new A350 and renamed it the A350 XWB. In first instance, the smallest version of the A350 XWB, the A350-800 was aimed at the market segment of the A330-200/300. However, as this was a shrink from the baseline A350-900, the A350-800 was a suboptimal design.',
-          user: createdUsers[0]
+          user: createdUsers[1]
         }, {
           type: '747-400',
           manufacturer: 'Boeing',
@@ -78,7 +78,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           year: 2009,
           image: 'https://gojetting.com/wp-content/uploads/2014/04/NEW_787_aircraft_masterimage-960x640.jpg',
           description: 'The 787 family is initially designed to replace the 757- and 767-products and is the most successful wide-bodied aircraft design ever in terms of aircraft ordered prior to its entry into service. The 787 family features many new technologies like a full composite structure including wing and barrel shaped fuselage sections (accommodates 9 abreast seating), new up to 15-20% more efficient and relatively quiet engines, improved aerodynamics and many new electric systems instead of pneumatics/hydraulics. The 787-8 is the \'baseline type\' and is optimized for the long-range medium-density markets and would serve as such as a replacement for the 767-300ER and be a new threat to the successful A330-200.',
-          user: createdUsers[0]
+          user: createdUsers[1]
         }, {
           type: '757-200',
           manufacturer: 'Boeing',
@@ -96,7 +96,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           year: 2006,
           image: 'https://wallup.net/wp-content/uploads/2017/11/22/362757-aircraft-military_aircraft-military-F-35_Lightning_II-Lockheed_Martin_F-35_Lightning_II-748x468.jpg',
           description: 'The Lockheed Martin F-35 Lightning II is a family of single-seat, single-engine, all-weather, stealth multirole combat aircraft, designed for ground-attack and air-superiority missions. The aircraft was developed and built by Lockheed Martin, with key subcontractors including Northrop Grumman, Pratt & Whitney, and BAE Systems. The F-35 has three main variants: the conventional takeoff and landing F-35A (CTOL), the short take-off and vertical-landing F-35B (STOVL), and the carrier-based F-35C (CV). The aircraft descends from the Lockheed Martin X-35, the design that was awarded the Joint Strike Fighter (JSF) program over the competing Boeing X-32 in 2001.',
-          user: createdUsers[0]
+          user: createdUsers[1]
         }
       ])
     })

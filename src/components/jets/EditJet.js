@@ -1,7 +1,6 @@
 import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/auth'
-
 import Form from './Form'
 
 class EditJet extends React.Component {
@@ -16,7 +15,7 @@ class EditJet extends React.Component {
       image: '',
       description: ''
     },
-    error: {}
+    errors: {}
   }
 
   async componentDidMount() {
@@ -31,8 +30,8 @@ class EditJet extends React.Component {
 
   handleChange = event => {
     const data = { ...this.state.data, [event.target.name]: event.target.value }
-    const error = { ...this.state.error, [event.target.name]: '' }
-    this.setState({ data, error })
+    const errors = { ...this.state.errors, [event.target.name]: '' }
+    this.setState({ data, errors })
   }
 
   handleSubmit = async (event) => {
@@ -40,18 +39,27 @@ class EditJet extends React.Component {
 
     const jetId = this.props.match.params.id
     try {
-      const res = await axios.put(`api/jets/${jetId}`, this.state.data, {
+      const res = await axios.put(`/api/jets/${jetId}`, this.state.data, {
         headers: { Authorization: `Bearer ${Auth.getToken()}` }
       })
       this.props.history.push(`/jets/${res.data._id}`)
-    } catch (error) {
-      this.setState({ errors: error.response.data.errors })
+    } catch (errors) {
+      this.setState({ errors: errors.response.data.errors })
     }
   }
 
   render() {
     return (
-      <h1>Edit Form</h1>
+      <section className="section">
+        <div className="container">
+          <Form
+            data={this.state.data}
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+            errors={this.state.errors}
+          />
+        </div>
+      </section>
     )
   }
 
