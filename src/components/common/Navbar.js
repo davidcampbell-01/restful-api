@@ -12,7 +12,7 @@ class Navbar extends React.Component {
 
   handleLogout = () => {
     Auth.logout()
-    notify.show('Come back soon!', 'custom', 3000, { background: '#FFFFF0' })
+    notify.show('Come back soon!', 'custom', 3000, { background: '#FFFFFF' })
     this.props.history.push('/')
   }
  
@@ -24,7 +24,7 @@ class Navbar extends React.Component {
 
   render() {
     return (
-      <nav className="navbar is-dark">
+      <nav className="navbar">
         <div className="container">
           <div className="navbar-brand">
             <Link className="navbar-item" to="/">Home</Link>
@@ -40,9 +40,9 @@ class Navbar extends React.Component {
           <div className={`navbar-menu ${this.state.navOpen ? 'is-active' : ''}`}>
             <div className="navbar-end">
               <Link className="navbar-item" to='/jets'>View All</Link>
-              {Auth.isAuthenticated() && <Link className="navbar-item" to='/jets/create'>Create</Link>}
               {!Auth.isAuthenticated() && <Link className="navbar-item" to='/login'>Login</Link>}
               {!Auth.isAuthenticated() && <Link className="navbar-item" to='/register'>Register</Link>}
+              {Auth.isAuthenticated() && <Link className="navbar-item" to='/jets/create'>Create</Link>}
               {Auth.isAuthenticated() && <a onClick={this.handleLogout} className="navbar-item">Logout</a>}
             </div>
           </div>
