@@ -1,8 +1,8 @@
 TODO:
 
-- Login
+- Login (needs styling)
 
-- Register
+- Register (needs styling and input fields added to render function)
 
 - Form
 

@@ -31,10 +31,10 @@ class ViewJet extends React.Component {
               </figure>
             </div>
             <div className="column is-half">
-              <h4 className="title is-4 has-text-dark">Commercial: {jet.commercial}</h4>
-              <h4 className="title is-4 has-text-dark">Operational: {jet.operational}</h4>
+              <h4 className="title is-4 has-text-dark">Commercial: {(jet.commercial ? 'Yes' : 'No')}</h4>
+              <h4 className="title is-4 has-text-dark">Operational: {(jet.operational ? 'Yes' : 'No')}</h4>
               <h4 className="title is-4 has-text-dark">Year: {jet.year}</h4>
-              <h5 className="title is-5 has-text-dark">Description: {jet.description}</h5>
+              <h5 className="title is-5 has-text-dark">{jet.description}</h5>
             </div>
           </div>
         </div>
