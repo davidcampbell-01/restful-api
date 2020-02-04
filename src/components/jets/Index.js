@@ -1,11 +1,14 @@
 import React from 'react'
 import axios from 'axios'
 import JetCard from './JetCard'
+import SearchBar from '../common/SearchBar'
+import Unknown from '../common/Unknown'
 
 class Index extends React.Component {
 
   state = {
-    jets: null
+    jets: null,
+    userInput: ''
   }
 
   async componentDidMount() {
@@ -18,13 +21,21 @@ class Index extends React.Component {
     }
   }
 
+  handleChange = (userInput) => {
+    this.setState({ userInput })
+  }
+
   render() {
     if (!this.state.jets) return null
+    const jetArray = this.state.jets.filter(jet => jet.type.toLowerCase().includes(this.state.userInput.toLowerCase()))
     return (
       <section className="section episode-index">
         <div className="container">
+          <SearchBar onChange={this.handleChange} />
           <div className="columns is-mobile is-multiline">
-            {this.state.jets.map(jet => <JetCard key={jet._id} {...jet} />)}
+            {jetArray.length === 0 && this.state.userInput ?
+              <Unknown /> :
+              jetArray.map(jet => <JetCard key={jet._id} {...jet} />)}
           </div>
         </div>
       </section>
