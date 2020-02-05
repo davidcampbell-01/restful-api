@@ -3,11 +3,11 @@ import React from 'react'
 const Form = ({ data, handleChange, handleSubmit, errors }) => (
 
   <div className="columns">
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="column is-half is-offset-one-quarter card">
 
-      <div>
-        <label>Type</label>
-        <div>
+      <div className="field">
+        <label className="label">Type</label>
+        <div className="control">
           <input
             className={`input ${errors.type ? 'is-danger' : ''}`}
             placeholder="Type"
@@ -19,9 +19,9 @@ const Form = ({ data, handleChange, handleSubmit, errors }) => (
         {errors.type && <small className="help is-danger">{errors.type}</small>}
       </div>
 
-      <div>
-        <label>Manufacturer</label>
-        <div>
+      <div className="field">
+        <label className="label">Manufacturer</label>
+        <div className="control">
           <input
             className={`input ${errors.manufacturer ? 'is-danger' : ''}`}
             placeholder="Manufacturer"
@@ -33,9 +33,9 @@ const Form = ({ data, handleChange, handleSubmit, errors }) => (
         {errors.manufacturer && <small className="help is-danger">{errors.manufacturer}</small>}
       </div>
 
-      <div>
-        <label>Commercial</label>
-        <div>
+      <div className="field">
+        <label className="label">Commercial</label>
+        <div className="control">
           <select onChange={handleChange} name="commercial" value={data.commercial}>
             <option value="true">Yes</option>
             <option value="false">No</option>
@@ -44,9 +44,9 @@ const Form = ({ data, handleChange, handleSubmit, errors }) => (
         {errors.commercial && <small className="help is-danger">{errors.commercial}</small>}
       </div>
 
-      <div>
-        <label>Operational</label>
-        <div>
+      <div className="field">
+        <label className="label">Operational</label>
+        <div className="control">
           <select onChange={handleChange} name="operational" value={data.operational}>
             <option value="true">Yes</option>
             <option value="false">No</option>
@@ -55,9 +55,9 @@ const Form = ({ data, handleChange, handleSubmit, errors }) => (
         {errors.operational && <small className="help is-danger">{errors.operational}</small>}
       </div>
 
-      <div>
-        <label>Year</label>
-        <div>
+      <div className="field">
+        <label className="label">Year</label>
+        <div className="control">
           <input
             className={`input ${errors.year ? 'is-danger' : ''}`}
             placeholder="Year"
@@ -69,9 +69,9 @@ const Form = ({ data, handleChange, handleSubmit, errors }) => (
         {errors.year && <small className="help is-danger">{errors.year}</small>}
       </div>
 
-      <div>
-        <label>Image URL</label>
-        <div>
+      <div className="field">
+        <label className="label">Image URL</label>
+        <div className="control">
           <input
             className={`input ${errors.image ? 'is-danger' : ''}`}
             placeholder="Image URL"
@@ -83,9 +83,9 @@ const Form = ({ data, handleChange, handleSubmit, errors }) => (
         {errors.image && <small className="help is-danger">{errors.image}</small>}
       </div>
 
-      <div>
-        <label>Description</label>
-        <div>
+      <div className="field">
+        <label className="label">Description</label>
+        <div className="control">
           <textarea
             className="textarea"
             placeholder="Description"
@@ -96,7 +96,7 @@ const Form = ({ data, handleChange, handleSubmit, errors }) => (
         </div>
       </div>
 
-      <div>
+      <div className="field">
         <div className="control">
           <button type="submit" className="button is-warning is-fullwidth">Submit</button>
         </div>

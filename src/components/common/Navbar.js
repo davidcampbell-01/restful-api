@@ -24,7 +24,7 @@ class Navbar extends React.Component {
 
   render() {
     return (
-      <nav className="navbar">
+      <nav className="navbar is-dark">
         <div className="container">
           <div className="navbar-brand">
             <Link className="navbar-item" to="/">Home</Link>

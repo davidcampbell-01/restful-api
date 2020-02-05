@@ -5,7 +5,11 @@ import Auth from '../../lib/auth'
 
 class ViewJet extends React.Component {
 
-  state = { jet: null }
+  state = {
+    data: {},
+    text: '',
+    errors: {}
+  }
 
   async componentDidMount() {
     const jetId = this.props.match.params.id
@@ -30,14 +34,32 @@ class ViewJet extends React.Component {
     }
   }
 
+  handleSubmit = async (event) => {
+    event.preventDefault()
+    const jetId = this.props.match.params.id
+    try {
+      await axios.post(`/api/jets/${jetId}/comments`, { text: this.state.text }, {
+        headers: { Authorization: `Bearer ${Auth.getToken()}` }
+      })
+      this.setState({ text: '' })
+    } catch (errors) {
+      this.setState({ errors: errors.response.data.errors })
+    }
+    this.componentDidMount()
+  }
+
+  handleChange = e => {
+    const text = e.target.value
+    this.setState({ text })
+  }
+
   isOwner = () => {
-    console.log(this.state.jet.user)
     return Auth.getPayload().sub === this.state.jet.user
   }
 
   render() {
     if (!this.state.jet) return null
-    const { jet } = this.state
+    const { jet, text } = this.state
     return (
       <section className="section">
         <div className="container">
@@ -45,7 +67,7 @@ class ViewJet extends React.Component {
           <h3 className="title is-3 has-text-dark">{jet.manufacturer}</h3>
           <div className="columns">
             <div className="column is-half">
-              <figure className="image">
+              <figure className="image is-3by2">
                 <img src={jet.image} alt={jet.type} />
               </figure>
             </div>
@@ -54,14 +76,37 @@ class ViewJet extends React.Component {
               <h4 className="title is-4 has-text-dark">Operational: {(jet.operational ? 'Yes' : 'No')}</h4>
               <h4 className="title is-4 has-text-dark">Year: {jet.year}</h4>
               <h5 className="title is-5 has-text-dark">{jet.description}</h5>
+
+              <div className="comments">
+                <ul className="is-7 has-text-dark">{jet.comments.map((comment, i) => (<li key={i}>{comment.text}</li>))}</ul>
+
+                <form onSubmit={this.handleSubmit}>
+                  <div className="field">
+                    <label className="label">Comment</label>
+                    <div className="control">
+                      <textarea
+                        className="textarea"
+                        placeholder="Add a comment"
+                        onChange={this.handleChange}
+                        value={text}
+                      />
+                    </div>
+                  </div>
+                  <div className="field">
+                    <div className="control">
+                      <button type="submit" className="button is-warning is-fullwidth">Add</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+
               <hr />
+
               {this.isOwner() &&
-                <>
-                  <Link to={`/jets/${jet._id}/edit`} className="button is-warning">
-                    Edit
-                  </Link>
-                  <button onClick={this.handleDelete} className="button is-danger">Delete</button>
-                </>
+                <div className="column">
+                  <Link to={`/jets/${jet._id}/edit`} className="button is-warning edit-button">Edit</Link>
+                  <button onClick={this.handleDelete} className="button is-danger delete-button">Delete</button>
+                </div>
               }
             </div>
           </div>
@@ -73,3 +118,5 @@ class ViewJet extends React.Component {
 }
 
 export default ViewJet
+
+// TODO: delete comment, secure route comment fix

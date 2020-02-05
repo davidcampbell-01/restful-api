@@ -14,7 +14,6 @@ class Index extends React.Component {
   async componentDidMount() {
     try {
       const jets = await axios.get('/api/jets')
-      console.log(jets.data)
       this.setState({ jets: jets.data })
     } catch (error) {
       console.log(error)
@@ -29,7 +28,7 @@ class Index extends React.Component {
     if (!this.state.jets) return null
     const jetArray = this.state.jets.filter(jet => jet.type.toLowerCase().includes(this.state.userInput.toLowerCase()))
     return (
-      <section className="section episode-index">
+      <section className="section">
         <div className="container">
           <SearchBar onChange={this.handleChange} />
           <div className="columns is-mobile is-multiline">

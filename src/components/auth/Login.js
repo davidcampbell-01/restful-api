@@ -33,14 +33,14 @@ class Login extends React.Component {
 
   render() {
     return (
-      <section>
-        <div>
-          <div>
-            <form onSubmit={this.handleSubmit}>
-              <h2>Login</h2>
-              <div>
-                <label>Email</label>
-                <div>
+      <section className="section">
+        <div className="container">
+          <div className="columns">
+            <form onSubmit={this.handleSubmit} className="column is-half is-offset-one-quarter card">
+              <h2 className="title">Login</h2>
+              <div className="field">
+                <label className="label">Email</label>
+                <div className="control">
                   <input
                     className={`input ${this.state.error} ? : 'is-danger' : '' `}
                     name="email"
@@ -49,9 +49,9 @@ class Login extends React.Component {
                   />
                 </div>
               </div>
-              <div>
-                <label>Password</label>
-                <div>
+              <div className="field">
+                <label className="label">Password</label>
+                <div className="control">
                   <input
                     className={`input ${this.state.error} ? : 'is-danger' : '' `}
                     type="password"

@@ -32,7 +32,7 @@ class Register extends React.Component {
 
   render() {
     return (
-      <section className="section cheese-image">
+      <section className="section">
         <div className="container">
           <div className="columns">
             <form onSubmit={this.handleSubmit} className="column is-half is-offset-one-quarter card">

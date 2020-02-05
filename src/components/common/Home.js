@@ -7,7 +7,7 @@ const Home = () => (
   <>
     <YoutubeBackground videoId={'Ss402giBAqM'}>
       <Link to="/jets">
-        <section className="hero">
+        <section className="hero is-fullheight-with-navbar">
           <div className="hero-body">
             <div className="container">
 
