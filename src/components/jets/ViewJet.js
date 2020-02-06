@@ -34,6 +34,21 @@ class ViewJet extends React.Component {
     }
   }
 
+  handleDeleteComment = async () => {
+    const jetId = this.props.match.params.id
+    const commentId = this.state.data
+    console.log(commentId)
+    try {
+      const { data } = await axios.get(`/api/jets/${jetId}`)
+      await axios.delete(`/api/jets/${jetId}/comments/${commentId}`, {
+        headers: { Authorization: `Bearer ${Auth.getToken()}` }
+      })
+      this.props.history.push('/jets')
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   handleSubmit = async (event) => {
     event.preventDefault()
     const jetId = this.props.match.params.id
@@ -70,35 +85,49 @@ class ViewJet extends React.Component {
               <figure className="image is-3by2">
                 <img src={jet.image} alt={jet.type} />
               </figure>
+
+              <hr />
+
+              <h4 className="title is-4 has-text-dark"><b>Comments:</b></h4>
+
+              <div className="comments">
+                <ul className="is-7 has-text-dark">{jet.comments.map((comment, i) => (
+                  <li key={i}>
+                    {comment.text}
+                    <button onClick={this.handleDeleteComment} className="button is-danger delete-button">Delete</button>
+                  </li>))}
+                </ul>
+              </div>
+
             </div>
+
             <div className="column is-half">
               <h4 className="title is-4 has-text-dark">Commercial: {(jet.commercial ? 'Yes' : 'No')}</h4>
               <h4 className="title is-4 has-text-dark">Operational: {(jet.operational ? 'Yes' : 'No')}</h4>
               <h4 className="title is-4 has-text-dark">Year: {jet.year}</h4>
               <h5 className="title is-5 has-text-dark">{jet.description}</h5>
 
-              <div className="comments">
-                <ul className="is-7 has-text-dark">{jet.comments.map((comment, i) => (<li key={i}>{comment.text}</li>))}</ul>
+              <hr />
 
-                <form onSubmit={this.handleSubmit}>
-                  <div className="field">
-                    <label className="label">Comment</label>
-                    <div className="control">
-                      <textarea
-                        className="textarea"
-                        placeholder="Add a comment"
-                        onChange={this.handleChange}
-                        value={text}
-                      />
-                    </div>
+              {Auth.isAuthenticated() && <form onSubmit={this.handleSubmit}>
+                <div className="field">
+                  <label className="label">Comment</label>
+                  <div className="control">
+                    <textarea
+                      className="textarea"
+                      placeholder="Add a comment"
+                      onChange={this.handleChange}
+                      value={text}
+                    />
                   </div>
-                  <div className="field">
-                    <div className="control">
-                      <button type="submit" className="button is-warning is-fullwidth">Add</button>
-                    </div>
+                </div>
+                <div className="field">
+                  <div className="control">
+                    <button type="submit" className="button is-warning is-fullwidth">Add</button>
                   </div>
-                </form>
-              </div>
+                </div>
+              </form>}
+
 
               <hr />
 
@@ -119,4 +148,4 @@ class ViewJet extends React.Component {
 
 export default ViewJet
 
-// TODO: delete comment, secure route comment fix
+// TODO: delete comment
