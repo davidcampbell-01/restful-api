@@ -36,10 +36,10 @@ class ViewJet extends React.Component {
 
   handleDeleteComment = async () => {
     const jetId = this.props.match.params.id
-    const commentId = this.state.data
-    console.log(commentId)
     try {
-      const { data } = await axios.get(`/api/jets/${jetId}`)
+      const { data } = await axios.get(`/api/jets/${jetId}/comments`)
+      const commentId = data._id
+      console.log(commentId)
       await axios.delete(`/api/jets/${jetId}/comments/${commentId}`, {
         headers: { Authorization: `Bearer ${Auth.getToken()}` }
       })
