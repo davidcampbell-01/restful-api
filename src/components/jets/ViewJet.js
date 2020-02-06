@@ -15,7 +15,7 @@ class ViewJet extends React.Component {
     const jetId = this.props.match.params.id
     try {
       const { data } = await axios.get(`/api/jets/${jetId}`)
-      console.log(jetId)
+      // console.log(jetId)
       this.setState({ jet: data })
     } catch (error) {
       this.props.history.push('/unknown')
@@ -34,19 +34,19 @@ class ViewJet extends React.Component {
     }
   }
 
-  handleDeleteComment = async () => {
+  handleDeleteComment = async (e) => {
+    e.preventDefault()
     const jetId = this.props.match.params.id
+    const commId = e.target.name
+    console.log(commId)
     try {
-      const { data } = await axios.get(`/api/jets/${jetId}/comments`)
-      const commentId = data._id
-      console.log(commentId)
-      await axios.delete(`/api/jets/${jetId}/comments/${commentId}`, {
+      await axios.delete(`/api/jets/${jetId}/comments/${commId}`, {
         headers: { Authorization: `Bearer ${Auth.getToken()}` }
       })
-      this.props.history.push('/jets')
     } catch (err) {
       console.log(err)
     }
+    this.componentDidMount()
   }
 
   handleSubmit = async (event) => {
@@ -91,10 +91,10 @@ class ViewJet extends React.Component {
               <h4 className="title is-4 has-text-dark"><b>Comments:</b></h4>
 
               <div className="comments">
-                <ul className="is-7 has-text-dark">{jet.comments.map((comment, i) => (
-                  <li key={i}>
+                <ul className="is-7 has-text-dark">{jet.comments.map(comment => (
+                  <li key={comment._id}>
                     {comment.text}
-                    <button onClick={this.handleDeleteComment} className="button is-danger delete-button">Delete</button>
+                    <button onClick={this.handleDeleteComment} name={comment._id} type="submit" className="button is-danger delete-button">Delete</button>
                   </li>))}
                 </ul>
               </div>
@@ -147,5 +147,3 @@ class ViewJet extends React.Component {
 }
 
 export default ViewJet
-
-// TODO: delete comment

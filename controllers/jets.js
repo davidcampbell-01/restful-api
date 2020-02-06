@@ -59,15 +59,12 @@ function commentDelete(req, res) {
     .then(jet => {
       if (!jet) return res.status(404).json({ message: 'Not Found' })
       const comment = jet.comments.id(req.params.commentId)
-      
-      
-      
-      if (!comment.user.equals(req.currentUser._id)) {
-        return res.status(401).json({ message: 'Unauthorized' })
-      } else {
-        return jet.save().then(() => res.sendStatus(204))
-      }
+      if (!comment) return res.status(404).json({ message: 'Not Found' })
+      if (!comment.user.equals(req.currentUser._id)) return res.status(401).json({ message: 'Unauthorized' })
+      comment.remove()
+      return jet.save()
     })
+    .then(jet => res.status(202).json(jet))
     .catch(err => res.json(err))
 }
 
